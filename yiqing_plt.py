@@ -34,7 +34,7 @@ def xiantu1(df,x1,y1,x2,y2,title):
 
     plt.show()
 def main():
-    df = pd.read_csv ('/users/mac/downloads/yiqing_view.csv')
+    df = pd.read_csv ('/Users/mac/python/yiqing2020/yiqing_data/yiqing_view.csv')
     x1,y1 = df.日期, df.确诊
     x2,y2 = df.日期, df.疑似
     title = '疑似、确诊人数曲线'

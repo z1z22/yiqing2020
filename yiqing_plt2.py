@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-df = pd.read_csv ('/users/mac/python/txt/yiqing/yiqing_view.csv')
+df = pd.read_csv ('/Users/mac/python/yiqing2020/yiqing_data/yiqing_view.csv')
 plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
 plt.rcParams['axes.unicode_minus'] = False
 

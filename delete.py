@@ -43,7 +43,7 @@ def main():
     url = 'https://server.toolbon.com/home/tools/getPneumonia'
 
     # r = request_handle(url)
-    with open('/users/mac/python/txt/yiqing/[2020-02-10]yiqing_full.json', 'r') as f:
+    with open('/Users/mac/python/yiqing2020/yiqing_data/[2020-02-09]yiqing_full.json', 'r') as f:
        r = f.read()
 
     rdict = json.loads(r)
