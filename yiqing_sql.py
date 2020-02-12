@@ -8,7 +8,7 @@ def request_handle(url):
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36 Edg/79.0.309.71'}
     r = requests.get(url, headers = headers, timeout= 5)
     coding = r.apparent_encoding
-    r.encoding = 'utf8'
+    r.encoding = coding
     return r
 
 def parse_china_item(response):

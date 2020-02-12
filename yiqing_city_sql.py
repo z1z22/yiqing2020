@@ -17,7 +17,7 @@ def request_handle(url):
 
 def parse_china_item(response):
     '''解析提取文件'''
-    rdict = json.loads(response)
+    rdict = response.json()
     return rdict['data']['areaList']
 
 def create_table(item,tablename):
@@ -86,9 +86,9 @@ def main():
 
     url = 'https://server.toolbon.com/home/tools/getPneumonia'
 
-    # r = request_handle(url)
-    with open('/Users/mac/python/yiqing2020/yiqing_data/[2020-02-09]yiqing_country.json', 'r') as f:
-       r = f.read()
+    r = request_handle(url)
+    # with open('/Users/mac/python/yiqing2020/yiqing_data/[2020-02-09]yiqing_country.json', 'r') as f:
+    #    r = f.read()
     rdict = json.loads(r)
     modifytime = rdict["data"]["statistics"]["modifyTime"]
     timeArray = time.localtime(modifytime/1000)

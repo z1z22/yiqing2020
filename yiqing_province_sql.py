@@ -28,7 +28,6 @@ def create_table(item):
         `confirmedCount` int(7) DEFAULT NULL,
         `curedCount` int(7) DEFAULT NULL,
         `deadCount` int(7) DEFAULT NULL,
-        `tags` CHAR(100) DEFAULT NULL,
         PRIMARY KEY (`num`)
         )'''
     print(sql)
@@ -51,16 +50,14 @@ def insert_mysql(item):
         `provinceName`,
         `confirmedCount`,
         `curedCount`,
-        `deadCount`,
-        `tags`
-        ) VALUES('%s','%s','%s','%s','%s','%s','%s')''' %(
+        `deadCount`
+        ) VALUES('%s','%s','%s','%s','%s','%s')''' %(
         item['provinceId'],
         item['modifyTime'],
         item['provinceName'],
         item['confirmedCount'],
         item['curedCount'],
-        item['deadCount'],
-        item['tags']
+        item['deadCount']
         )
     print(sql)
 
@@ -80,11 +77,11 @@ def main():
 
     url = 'https://server.toolbon.com/home/tools/getPneumonia'
 
-    # r = request_handle(url)
-    with open('/Users/mac/python/yiqing2020/yiqing_data/[2020-02-11]yiqing_full.json', 'r') as f:
-       r = f.read()
+    r = request_handle(url)
+    # with open('/Users/mac/python/yiqing2020/yiqing_data/[2020-02-14]yiqing_full.json', 'r') as f:
+    #    r = f.read()
 
-    item_list = parse_china_item(r)
+    item_list = parse_china_item(r.text)
 
     for item in item_list:
     #对timeArray进行格式转换
