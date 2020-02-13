@@ -30,8 +30,8 @@ def parse_country(text):
 
 def creatfile(path,string):
 
-    with open(path,'w') as f:
-        f.write(string)
+    with open(path,'w') as ft:
+        ft.write(string)
 
 
 def main():
