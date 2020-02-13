@@ -44,19 +44,19 @@ def main():
     r = request_handle(url[0])
 
     area = parse_area(r.text)
-    path_area = f'/Users/mac/python/yiqing2020/yiqing_data/[{date.today()}]yiqing_area.json'
+    path_area = f'./yiqing_data/[{date.today()}]yiqing_area.json'
     creatfile(path_area, area)
     
     print('area文件已储存')
 
     country = parse_country(r.text)
-    path_country = f'/Users/mac/python/yiqing2020/yiqing_data/[{date.today()}]yiqing_country.json'
+    path_country = f'./yiqing_data/[{date.today()}]yiqing_country.json'
     creatfile(path_country, country)
     print('country文件已储存')
 
     r = request_handle(url[1])
 
-    path_full = f'/Users/mac/python/yiqing2020/yiqing_data/[{date.today()}]yiqing_full.json'
+    path_full = f'./yiqing_data/[{date.today()}]yiqing_full.json'
     creatfile(path_full, r.text)
     print('full文件已储存')
 
