@@ -53,8 +53,7 @@ def insert_mysql(item):
         confirmedCount,
         curedCount,
         deadCount,
-        seriousCount,
-
+        seriousCount
         ) VALUES('%s','%s','%s','%s','%s','%s')''' %(
         item['modifyTime'],
         item['suspectedCount'],
@@ -82,14 +81,14 @@ def main():
     '''官方在2月13日修改了借口数据结构，删除了每日增长数据，增加了各地现有确诊人数,
     2月13日后使用次文件爬取'''
 
-    # url = 'https://server.toolbon.com/home/tools/getPneumonia'
+    url = 'https://server.toolbon.com/home/tools/getPneumonia'
 
-    # r = request_handle(url)
-    # item = parse_china_item(r)
+    r = request_handle(url)
+    item = parse_china_item(r)
 
-    with open('./yiqing_data/[2020-02-10]yiqing_full.json', 'r') as ft:
-        r = ft.read()
-    item = parse_by_json(r)
+    # with open('./yiqing_data/[2020-02-10]yiqing_full.json', 'r') as ft:
+    #     r = ft.read()
+    # item = parse_by_json(r)
 
     #对timeArray进行格式转换
     timeArray = time.localtime(item.get('modifyTime')/1000)
