@@ -10,13 +10,19 @@ def request_handle(url):
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36 Edg/79.0.309.71'}
     r = requests.get(url, headers = headers, timeout= 5)
     coding = r.apparent_encoding
-    r.encoding = 'utf8'
+    r.encoding = coding
     return r
 
+
 def parse_china_item(response):
-    '''解析提取文件'''
-    rdict = json.loads(response)
-    return rdict['data']['listData']
+    '''从response中解析提取文件'''
+    rdict = response.json()
+    return rdict['data']['statistics']
+
+def parse_by_json(text):
+    '''本地文本倒入数据库时用的解析'''
+    json_dict = json.loads(text)
+    return json_dict['data']['listData']
 
 def create_table(item):
     '''创建表'''
@@ -78,10 +84,11 @@ def main():
     url = 'https://server.toolbon.com/home/tools/getPneumonia'
 
     r = request_handle(url)
+    item_list = parse_china_item(r)
     # with open('/Users/mac/python/yiqing2020/yiqing_data/[2020-02-14]yiqing_full.json', 'r') as f:
     #    r = f.read()
+    # item_list = parse_by_json(r)
 
-    item_list = parse_china_item(r.text)
 
     for item in item_list:
     #对timeArray进行格式转换
