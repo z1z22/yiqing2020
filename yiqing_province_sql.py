@@ -22,7 +22,7 @@ def parse_china_item(response):
 def parse_by_json(text):
     '''本地文本倒入数据库时用的解析'''
     json_dict = json.loads(text)
-    return json_dict['data']['listData']
+    return json_dict['data']['statistics']
 
 def create_table(item):
     '''创建表'''
@@ -81,13 +81,13 @@ def insert_mysql(item):
 def main():
     '''下载解析相关数据，存入mysql'''
 
-    url = 'https://server.toolbon.com/home/tools/getPneumonia'
+    # url = 'https://server.toolbon.com/home/tools/getPneumonia'
+    # r = request_handle(url)
+    # item_list = parse_china_item(r)
 
-    r = request_handle(url)
-    item_list = parse_china_item(r)
-    # with open('/Users/mac/python/yiqing2020/yiqing_data/[2020-02-14]yiqing_full.json', 'r') as f:
-    #    r = f.read()
-    # item_list = parse_by_json(r)
+    with open('/Users/mac/python/yiqing2020/yiqing_data/[2020-02-1]yiqing_full.json', 'r') as f:
+       r = f.read()
+    item_list = parse_by_json(r)
 
 
     for item in item_list:
