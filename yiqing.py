@@ -49,10 +49,10 @@ def main():
     
     print('area文件已储存')
 
-    country = parse_country(r.text)
-    path_country = f'./yiqing_data/[{date.today()}]yiqing_country.json'
-    create_file(path_country, country)
-    print('country文件已储存')
+    # country = parse_country(r.text)
+    # path_country = f'./yiqing_data/[{date.today()}]yiqing_country.json'
+    # create_file(path_country, country)
+    # print('country文件已储存')
 
     r = request_handle(url[1])
 
