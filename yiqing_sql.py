@@ -24,7 +24,7 @@ def parse_by_json(text):
 
 def create_table(item):
     '''创建表'''
-    sql = '''CREATE TABLE `china2020_test` (`num` int(4) NOT NULL AUTO_INCREMENT,
+    sql = '''CREATE TABLE `china2020` (`num` int(4) NOT NULL AUTO_INCREMENT,
                              `date` date DEFAULT NULL,
                              `confirmedCount` int(7) DEFAULT NULL,
                              `suspectedCount` int(7) DEFAULT NULL,
@@ -51,7 +51,7 @@ def create_table(item):
         exit()
 def insert_mysql(item):
 
-    sql = '''INSERT INTO china2020_test(
+    sql = '''INSERT INTO china2020(
         date, 
         suspectedCount,
         confirmedCount,
@@ -84,7 +84,7 @@ def insert_mysql(item):
         print('---------------写入MySQL成功------------')
     except:
         db.rollback()
-        print('---------------写入MySQL不成功------------')
+        print('---------------写入MySQL不成------------')
         create_table(item)
     db.close()
 

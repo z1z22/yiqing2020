@@ -28,7 +28,7 @@ def parse_country(text):
     return country
 
 
-def creatfile(path,string):
+def create_file(path,string):
 
     with open(path,'w') as ft:
         ft.write(string)
@@ -45,19 +45,19 @@ def main():
 
     area = parse_area(r.text)
     path_area = f'./yiqing_data/[{date.today()}]yiqing_area.json'
-    creatfile(path_area, area)
+    create_file(path_area, area)
     
     print('area文件已储存')
 
     country = parse_country(r.text)
     path_country = f'./yiqing_data/[{date.today()}]yiqing_country.json'
-    creatfile(path_country, country)
+    create_file(path_country, country)
     print('country文件已储存')
 
     r = request_handle(url[1])
 
     path_full = f'./yiqing_data/[{date.today()}]yiqing_full.json'
-    creatfile(path_full, r.text)
+    create_file(path_full, r.text)
     print('full文件已储存')
 
 
