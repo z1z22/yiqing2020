@@ -93,14 +93,14 @@ def insert_mysql(item):
 def main():
     '''下载解析相关数据，存入mysql'''
 
-    # url = 'https://server.toolbon.com/home/tools/getPneumonia'
+    url = 'https://server.toolbon.com/home/tools/getPneumonia'
 
-    # r = request_handle(url)
-    # item = parse_china_item(r)
+    r = request_handle(url)
+    item = parse_china_item(r)
 
-    with open('./yiqing_data/[2020-02-10]yiqing_full.json', 'r') as ft:
-        r = ft.read()
-    item = parse_by_json(r)
+    # with open('./yiqing_data/[2020-02-10]yiqing_full.json', 'r') as ft:
+    #     r = ft.read()
+    # item = parse_by_json(r)
 
     #对timeArray进行格式转换
     timeArray = time.localtime(item.get('modifyTime')/1000)

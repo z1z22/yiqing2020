@@ -17,12 +17,12 @@ def request_handle(url):
 def parse_china_item(response):
     '''从response中解析提取文件'''
     rdict = response.json()
-    return rdict['data']['statistics']
+    return rdict['data']['listData']
 
 def parse_by_json(text):
     '''本地文本倒入数据库时用的解析'''
     json_dict = json.loads(text)
-    return json_dict['data']['statistics']
+    return json_dict['data']['listData']
 
 def create_table(item):
     '''创建表'''
@@ -81,17 +81,18 @@ def insert_mysql(item):
 def main():
     '''下载解析相关数据，存入mysql'''
 
-    # url = 'https://server.toolbon.com/home/tools/getPneumonia'
-    # r = request_handle(url)
-    # item_list = parse_china_item(r)
+    url = 'https://server.toolbon.com/home/tools/getPneumonia'
+    r = request_handle(url)
+    item_list = parse_china_item(r)
 
-    with open('/Users/mac/python/yiqing2020/yiqing_data/[2020-02-1]yiqing_full.json', 'r') as f:
-       r = f.read()
-    item_list = parse_by_json(r)
+    # with open('/Users/mac/python/yiqing2020/yiqing_data/[2020-02-1]yiqing_full.json', 'r') as f:
+    #    r = f.read()
+    # item_list = parse_by_json(r)
 
 
     for item in item_list:
     #对timeArray进行格式转换
+        # print(item)
         timeArray = time.localtime(item.get('modifyTime')/1000)
         item['modifyTime']= time.strftime("%Y-%m-%d", timeArray)
 
