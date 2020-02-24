@@ -136,3 +136,4 @@ dmypy.json
 #mac
 .DS_Store
 yiqing_data/
+.vscode/
