@@ -95,11 +95,11 @@ def main():
     areaList = rdict['data']['areaList']
     for province in areaList:
         provinceName = province.get('provinceName')
-        provinceId = int(province.get('locationId'))/10000
+        provinceId = int(province.get('locationId'))//10000
         for city in province.get('cities'):
             city['modifyTime'] = time.strftime("%Y-%m-%d", timeArray)
             city['provinceId'] = provinceId
-            print(city)
+            # print(city)
             insert_mysql(city, provinceName)
     db.close()
 
