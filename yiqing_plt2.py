@@ -1,12 +1,15 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-df = pd.read_csv ('/Users/mac/python/yiqing2020/yiqing_data/yiqing_view.csv')
+from sqlalchemy import create_engine
+#对plt进行设置,避免中文乱码,注意Mac可用的字体是Arial Unicode MS
 plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
 plt.rcParams['axes.unicode_minus'] = False
+engine = create_engine('mysql+pymysql://zz:asimazz@localhost:3306/yiqing2020')
+df= pd.read_sql_table('yiqing_view',engine)
 
 
-plt.figure(figsize=(14,8))
+plt.figure(figsize=(12,5))
 plt.plot(df.日期, df.确诊,'o-',linewidth =3)
 plt.plot(df.日期, df.疑似,'o-',linewidth =3)
 plt.plot(df.日期, df.治愈,'o-',linewidth = 3)
