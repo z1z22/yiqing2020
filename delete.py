@@ -1,8 +1,6 @@
 import json
 import requests
 import pymysql
-import time
-from datetime import date
 
 
 db = pymysql.connect('localhost', 'root', 'oooo0000', 'yiqing2020')
@@ -18,13 +16,14 @@ def request_handle(url):
 def parse_china_item(response):
     '''解析提取文件'''
     rdict = json.loads(response)
+    # rdict = response.json()
     return rdict['data']['areaList']
 
 
         
 def delete_mysql(tablename):
     '''删除项目'''
-    sql = '''delete from %s where date='2020-02-10' ''' %(tablename)
+    sql = '''delete from %s where date='2020-03-04' ''' %(tablename)
     print(sql)
     try:
         cursor.execute(sql)
@@ -38,17 +37,13 @@ def delete_mysql(tablename):
 
 
 def main():
-    '''下载解析相关数据，存入mysql'''
+    '''下载解析相关数据'''
 
-    url = 'https://server.toolbon.com/home/tools/getPneumonia'
+    # url = 'https://server.toolbon.com/home/tools/getPneumonia'
 
     # r = request_handle(url)
-    with open('/Users/mac/python/yiqing2020/yiqing_data/[2020-02-09]yiqing_full.json', 'r') as f:
+    with open('yiqing_data/[2020-03-04]yiqing_full.json', 'r') as f:
        r = f.read()
-
-    rdict = json.loads(r)
-    modifytime = rdict["data"]["statistics"]["modifyTime"]
-    timeArray = time.localtime(modifytime/1000)
 
     areaList = parse_china_item(r)
     for province in areaList:
