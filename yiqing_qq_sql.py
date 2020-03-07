@@ -28,20 +28,20 @@ def create_table(item):
         insert_mysql(item)
     except:
         db.rollback()
-        print('---------------创建MySQL_TABLE不成功------------')
+        print('##############创建MySQL_TABLE不成功###########')
         db.close()
         exit()
 
 def insert_mysql(sql):
     '''执行sql语句插入到mysql'''
-    print(sql)
+    # print(sql)
     try:
         cursor.execute(sql)
         db.commit()
         print('---------------写入MySQL成功------------')
     except:
         db.rollback()
-        print('---------------写入MySQL不成功------------')
+        print('#############写入MySQL不成功############')
         # create_table(item)
 
 def sql_dayList(item):
@@ -126,7 +126,7 @@ def sql_new(item):
         `notHubei`
         ) VALUES(
         "{item['date']}",
-        "{item['hubei']},"
+        "{item['hubei']}",
         "{item['country']}",
         "{item['notHubei']}"
         )'''
