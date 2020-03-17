@@ -1,7 +1,12 @@
 import json
 import requests
 import pymysql
-import time
+import datetime
+def getYesterday(): 
+    today=datetime.date.today() 
+    oneday=datetime.timedelta(days=1) 
+    yesterday=today-oneday  
+    return yesterday
 
 db = pymysql.connect('localhost', 'root', 'oooo0000', 'yiqing2020')
 cursor = db.cursor()
@@ -17,12 +22,12 @@ def request_handle(url):
 def parse_china_item(response):
     '''从response中解析提取文件'''
     rdict = response.json()
-    return rdict['data']['listData']
+    return rdict['data']['areaList']
 
 def parse_by_json(text):
     '''本地文本倒入数据库时用的解析'''
     json_dict = json.loads(text)
-    return json_dict['data']['listData']
+    return json_dict['data']['areaList']
 
 def create_table(item):
     '''创建表'''
@@ -58,7 +63,7 @@ def insert_mysql(item):
         `curedCount`,
         `deadCount`
         ) VALUES('%s','%s','%s','%s','%s','%s')''' %(
-        item['provinceId'],
+        item['locationId']//1000,
         item['modifyTime'],
         item['provinceName'],
         item['confirmedCount'],
@@ -93,8 +98,8 @@ def main():
     for item in item_list:
     #对timeArray进行格式转换
         # print(item)
-        timeArray = time.localtime(item.get('modifyTime')/1000)
-        item['modifyTime']= time.strftime("%Y-%m-%d", timeArray)
+        # timeArray = time.localtime(item.get('modifyTime')/1000)
+        item['modifyTime']= datetime.date.today() 
 
         insert_mysql(item)
     db.close()
