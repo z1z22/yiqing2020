@@ -135,8 +135,9 @@ def sql_new(item):
 def main():
     '''下载qq解析相关数据，存入mysql'''
 
-    url = 'https://view.inews.qq.com/g2/getOnsInfo?name=disease_other'
-    r = request_handle(url)
+    url = ('https://view.inews.qq.com/g2/getOnsInfo?name=disease_other',
+        'https://view.inews.qq.com/g2/getOnsInfo?name=disease_foreign')
+    r = request_handle(url[0])
     r_dict= r.json()
 
     # with open('yiqing_data/qq/[2020-03-04]qq_total.txt','r') as ft:
@@ -155,8 +156,6 @@ def main():
     # for chinaday in data_dict['chinaDayList']:
     #     sql_dayList(chinaday)
 
-    for foreign in data_dict['foreignList']:
-        sql_foreign(foreign)
 
     dayadd = data_dict['chinaDayAddList'][-1]
     sql_add(dayadd)
@@ -166,6 +165,17 @@ def main():
 
     chinaday = data_dict['chinaDayList'][-1]
     sql_dayList(chinaday)
+
+
+
+    r1 = request_handle(url[1])
+    r_dict1= r1.json()
+
+    data1 = r_dict1['data']
+    data_dict1 = json.loads(data1)
+
+    for foreign in data_dict1['foreignList']:
+        sql_foreign(foreign)
 
     db.close()
 

@@ -37,8 +37,9 @@ def create_file(path,string):
 def main():
 
     url = (
-    'https://view.inews.qq.com/g2/getOnsInfo?name=disease_other',#
-    'https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5'
+    'https://view.inews.qq.com/g2/getOnsInfo?name=disease_other',
+    'https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5',
+    'https://view.inews.qq.com/g2/getOnsInfo?name=disease_foreign'
     )
 
 
@@ -56,16 +57,19 @@ def main():
     # print('country文件已储存')
 
     r = request_handle(url[0])
-
     path_full = f'./yiqing_data/qq/[{date.today()}]qq_total.txt'
     create_file(path_full, r.text)
     print('qq_total文件已储存')
 
     r = request_handle(url[1])
-
     path_full = f'./yiqing_data/qq/[{date.today()}]qq_today.txt'
     create_file(path_full, r.text)
     print('qq_today文件已储存')
+
+    r = request_handle(url[2])
+    path_full = f'./yiqing_data/qq/[{date.today()}]qq_foreign.txt'
+    create_file(path_full, r.text)
+    print('qq_foreign文件已储存')    
 
 
 
